@@ -4,31 +4,78 @@
   "info": {
     "singularName": "author",
     "pluralName": "authors",
-    "displayName": "Author",
-    "description": "Create authors for your content"
+    "displayName": "Authors"
   },
   "options": {
-    "draftAndPublish": false
+    "draftAndPublish": true
   },
   "pluginOptions": {},
   "attributes": {
-    "name": {
-      "type": "string"
+    "Name": {
+      "type": "string",
+      "required": true
     },
-    "avatar": {
+    "Designation": {
+      "type": "string",
+      "required": true
+    },
+    "Image": {
       "type": "media",
       "multiple": false,
-      "required": false,
-      "allowedTypes": ["images", "files", "videos"]
+      "required": true,
+      "allowedTypes": [
+        "images",
+        "files"
+      ]
     },
-    "email": {
-      "type": "string"
+    "Bio": {
+      "type": "customField",
+      "customField": "plugin::ckeditor5.CKEditor",
+      "options": {
+        "preset": "defaultHtml"
+      }
     },
-    "articles": {
+    "Social": {
+      "type": "component",
+      "component": "shared.social",
+      "repeatable": false
+    },
+    "Slug": {
+      "type": "uid",
+      "targetField": "Name",
+      "required": true
+    },
+    "anaxdevelopments_coms": {
       "type": "relation",
       "relation": "oneToMany",
-      "target": "api::article.article",
-      "mappedBy": "author"
+      "target": "api::anaxdevelopment-com.anaxdevelopment-com",
+      "mappedBy": "Authors"
+    },
+    "satishsanpal_coms": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::satishsanpal-com.satishsanpal-com",
+      "mappedBy": "Authors"
+    },
+    "anaxholding_coms": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::anaxholding-com.anaxholding-com",
+      "mappedBy": "Authors"
+    },
+    "SEO": {
+      "type": "component",
+      "component": "shared.seo",
+      "repeatable": false
+    },
+    "Environment": {
+      "type": "enumeration",
+      "required": true,
+      "default": "Production",
+      "enum": [
+        "Production",
+        "Staging"
+      ]
     }
   }
 }

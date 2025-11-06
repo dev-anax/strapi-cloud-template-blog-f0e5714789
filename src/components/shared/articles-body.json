@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_shared_articles_bodies",
+  "info": {
+    "displayName": "Articles Body"
+  },
+  "options": {},
+  "attributes": {
+    "Content": {
+      "type": "customField",
+      "customField": "plugin::ckeditor5.CKEditor",
+      "options": {
+        "preset": "defaultHtml"
+      },
+      "required": true
+    }
+  },
+  "config": {}
+}

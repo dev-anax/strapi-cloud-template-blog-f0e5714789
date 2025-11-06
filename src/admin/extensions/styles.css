@@ -1,0 +1,7 @@
+.ck-editor__editable, .ck-editor__editable_inline, .ck-content {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+}
+.ck-editor__editable p, .ck-content p {
+  color: #000000 !important;
+}

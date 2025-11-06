@@ -1,0 +1,169 @@
+{
+  "kind": "collectionType",
+  "collectionName": "anaxholding_coms",
+  "info": {
+    "singularName": "anaxholding-com",
+    "pluralName": "anaxholding-coms",
+    "displayName": "Anaxholding.com"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Environment": {
+      "type": "enumeration",
+      "required": true,
+      "default": "Production",
+      "enum": [
+        "Production",
+        "Staging"
+      ]
+    },
+    "Placement": {
+      "type": "enumeration",
+      "required": true,
+      "default": "Internal",
+      "enum": [
+        "Internal",
+        "External"
+      ]
+    },
+    "Slug": {
+      "type": "uid",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "Placement"
+            },
+            "Internal"
+          ]
+        }
+      },
+      "targetField": "Title",
+      "required": true
+    },
+    "URL": {
+      "type": "text",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "Placement"
+            },
+            "External"
+          ]
+        }
+      },
+      "required": true,
+      "unique": true
+    },
+    "categories": {
+      "type": "customField",
+      "customField": "plugin::multi-select.multi-select",
+      "default": "[\"blogs\"]",
+      "options": [
+        "blogs",
+        "philanthropy",
+        "press-and-media",
+        "biography",
+        "anax-holding",
+        "anax-development",
+        "anax-hospitality"
+      ],
+      "required": true
+    },
+    "PublishedOn": {
+      "type": "date",
+      "required": true
+    },
+    "Title": {
+      "type": "text",
+      "required": true
+    },
+    "Description": {
+      "type": "text",
+      "required": true
+    },
+    "Heading": {
+      "type": "text",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "Placement"
+            },
+            "Internal"
+          ]
+        }
+      },
+      "required": true
+    },
+    "Logo": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "Poster": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images",
+        "videos"
+      ]
+    },
+    "SEO": {
+      "type": "component",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "Placement"
+            },
+            "Internal"
+          ]
+        }
+      },
+      "component": "shared.seo",
+      "repeatable": false,
+      "required": true
+    },
+    "Content": {
+      "type": "component",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "Placement"
+            },
+            "Internal"
+          ]
+        }
+      },
+      "component": "shared.articles-body",
+      "repeatable": false,
+      "required": true
+    },
+    "Authors": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::author.author",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "Placement"
+            },
+            "Internal"
+          ]
+        }
+      },
+      "inversedBy": "anaxholding_coms"
+    }
+  }
+}
